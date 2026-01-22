@@ -254,7 +254,7 @@ This project is licensed under the GPL v2 License - see the [LICENSE](LICENSE) f
 
 ## Author
 
-**Jiawei** - 2025
+**Jiawei Qi** - 2026
 
 ## Acknowledgments
 
