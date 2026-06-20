@@ -4,7 +4,7 @@
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)](https://notepad-plus-plus.org/)
 [![Notepad++](https://img.shields.io/badge/Notepad++-Plugin-green.svg)](https://notepad-plus-plus.org/)
 
-A Notepad++ plugin that integrates AI capabilities (ChatGPT, Claude, Gemini) directly into the editor.
+A Notepad++ plugin that integrates AI capabilities (ChatGPT, Claude, Gemini, Ollama) directly into the editor.
 
 ![AI Panel Screenshot](docs/screenshot.png)
 
@@ -34,14 +34,14 @@ A Notepad++ plugin that integrates AI capabilities (ChatGPT, Claude, Gemini) dir
 
 1. Download the latest release from [Releases](../../releases)
 2. Extract the appropriate DLL for your Notepad++ version:
-   - **64-bit Notepad++**: Use `notepad_aiplug_x64.dll`
-   - **32-bit Notepad++**: Use `notepad_aiplug_x86.dll`
+   - **64-bit Notepad++**: Use `NPPAIPlugin-Ollama.dll`
 3. Copy the DLL to your Notepad++ plugins folder:
    ```
-   %ProgramFiles%\Notepad++\plugins\notepad_aiplug\notepad_aiplug.dll
+   %ProgramFiles%\Notepad++\plugins\NPPAIPlugin-Ollama\NPPAIPlugin-Ollama.dll
    ```
 4. Restart Notepad++
 5. Configure your API keys in **Plugins > AI Assistant > Settings**
+6. Configure AI models on ```%App-Data%\Notepad++\plugins\config\notepad_aiplug.ini```
 
 ### From Source
 
@@ -65,7 +65,7 @@ The panel will dock on the right side of Notepad++.
 
 ### Basic Workflow
 
-1. **Select a provider** from the dropdown (ChatGPT, Claude, Gemini, or custom)
+1. **Select a provider** from the dropdown (ChatGPT, Claude, Gemini, Ollama or custom)
 2. **Type your question** in the prompt box at the bottom
 3. Click **Send** or press `Enter`
 4. View the AI response in the chat history
@@ -103,10 +103,10 @@ You can use any OpenAI-compatible API by setting a custom URL:
 </details>
 
 <details>
-<summary><b>Local LLM Example (Ollama, LM Studio)</b></summary>
+<summary><b>Local LLM Example (LM Studio)</b></summary>
 
 - **Provider**: ChatGPT (OpenAI)
-- **API Key**: `not-needed` (or leave empty if your server doesn't require it)
+- **API Key**: `not-needed` (or leave empty if your server doesn't require it) #Not needed for Ollama
 - **Custom URL**: `http://localhost:11434/v1/chat/completions`
 
 </details>
@@ -164,10 +164,8 @@ start notepad_aiplug.sln
 
 1. Select configuration:
    - **Release|x64** for 64-bit Notepad++
-   - **Release|Win32** for 32-bit Notepad++
 2. Build the solution (`Ctrl+Shift+B`)
 3. Copy the output DLL:
-   - **32-bit**: `bin\notepad_aiplug.dll`
    - **64-bit**: `bin64\notepad_aiplug.dll`
 
 ## Project Structure
@@ -193,7 +191,7 @@ notepad_aiplug/
 ├── res/                        # Dialog resources
 ├── lib/nlohmann/json.hpp       # JSON library
 ├── vs.proj/                    # Visual Studio project
-└── notepad_aiplug.sln          # Solution file
+└── NPPAIPlugin-Ollama.slnx          # Solution file
 ```
 
 ## Troubleshooting
@@ -255,6 +253,7 @@ This project is licensed under the GPL v2 License - see the [LICENSE](LICENSE) f
 ## Author
 
 **Jiawei Qi** - 2026
+**Mao Urban** - 2026
 
 ## Acknowledgments
 
