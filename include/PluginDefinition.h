@@ -31,7 +31,7 @@ void commandMenuInit();
 void commandMenuCleanUp();
 
 // Set command helper
-bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk = NULL, bool check0nInit = false);
+bool setCommand(size_t index, const TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk = NULL, bool check0nInit = false);
 
 // Plugin command functions
 void showAIPanel();
