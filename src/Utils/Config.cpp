@@ -23,10 +23,11 @@ void Config::initDefaultProviders()
 {
     _providers.clear();
 
-    // Add 3 built-in providers
+    // Add 4 built-in providers
     _providers.push_back(AIProviderConfig("ChatGPT (OpenAI)", APIType::OpenAI, true));
     _providers.push_back(AIProviderConfig("Claude (Anthropic)", APIType::Claude, true, "https://api.anthropic.com/v1/messages"));
     _providers.push_back(AIProviderConfig("Gemini (Google)", APIType::Gemini, true));
+	_providers.push_back(AIProviderConfig("Ollama",APIType::Ollama, true, "http://127.0.0.1:11434/v1/chat/completions"));
 }
 
 void Config::init(const std::wstring& configDir)
@@ -50,7 +51,7 @@ void Config::load()
     initDefaultProviders();
 
     // Load API keys and custom endpoints for built-in providers
-    if (_providers.size() >= 3)
+    if (_providers.size() >= 4)
     {
         _providers[0].apiKey = deobfuscate(readIniString(L"APIKeys", L"OpenAI", ""));
         _providers[1].apiKey = deobfuscate(readIniString(L"APIKeys", L"Claude", ""));
@@ -60,6 +61,7 @@ void Config::load()
         std::string openaiEndpoint = readIniString(L"Endpoints", L"OpenAI", "");
         std::string claudeEndpoint = readIniString(L"Endpoints", L"Claude", "");
         std::string geminiEndpoint = readIniString(L"Endpoints", L"Gemini", "");
+		std::string ollamaEndpoint = readIniString(L"Endpoints", L"Ollama", "");
 
         if (!openaiEndpoint.empty())
             _providers[0].customEndpoint = openaiEndpoint;
@@ -67,6 +69,8 @@ void Config::load()
             _providers[1].customEndpoint = claudeEndpoint;
         if (!geminiEndpoint.empty())
             _providers[2].customEndpoint = geminiEndpoint;
+		if (!ollamaEndpoint.empty())
+			_providers[3].customEndpoint = ollamaEndpoint;
     }
 
     // Load custom providers count
@@ -93,6 +97,11 @@ void Config::load()
     // Load preferences
     _defaultProvider = readIniInt(L"Preferences", L"DefaultProvider", 0);
     _editMode = static_cast<EditMode>(readIniInt(L"Preferences", L"EditMode", 0));
+	//
+	_openAIModel = readIniString( L"Models", L"OpenAI", "gpt-4o");
+	_claudeModel = readIniString( L"Models", L"Claude", "claude-sonnet-4-20250514");
+	_geminiModel = readIniString( L"Models", L"Gemini", "gemini-1.5-pro");
+	_ollamaModel = readIniString( L"Models", L"Ollama", "starcoder2:3b");
 
     // Validate default provider index
     if (_defaultProvider < 0 || _defaultProvider >= static_cast<int>(_providers.size()))
@@ -107,7 +116,7 @@ void Config::save()
         return;
 
     // Save API keys and custom endpoints for built-in providers
-    if (_providers.size() >= 3)
+    if (_providers.size() >= 4)
     {
         writeIniString(L"APIKeys", L"OpenAI", obfuscate(_providers[0].apiKey));
         writeIniString(L"APIKeys", L"Claude", obfuscate(_providers[1].apiKey));
@@ -117,11 +126,12 @@ void Config::save()
         writeIniString(L"Endpoints", L"OpenAI", _providers[0].customEndpoint);
         writeIniString(L"Endpoints", L"Claude", _providers[1].customEndpoint);
         writeIniString(L"Endpoints", L"Gemini", _providers[2].customEndpoint);
+		writeIniString(L"Endpoints", L"Ollama", _providers[3].customEndpoint);
     }
 
     // Count custom providers (non-built-in)
     int customCount = 0;
-    for (size_t i = 3; i < _providers.size(); i++)
+    for (size_t i = 4; i < _providers.size(); i++)
     {
         if (!_providers[i].isBuiltIn)
         {
@@ -131,10 +141,15 @@ void Config::save()
 
     // Save custom provider count
     writeIniInt(L"CustomProviders", L"Count", customCount);
+	//
+	writeIniString( L"Models", L"OpenAI", _openAIModel);
+	writeIniString( L"Models", L"Claude", _claudeModel);
+	writeIniString( L"Models", L"Gemini", _geminiModel);
+	writeIniString( L"Models", L"Ollama", _ollamaModel);
 
     // Save custom providers
     int customIndex = 0;
-    for (size_t i = 3; i < _providers.size(); i++)
+    for (size_t i = 4; i < _providers.size(); i++)
     {
         if (!_providers[i].isBuiltIn)
         {
@@ -161,8 +176,8 @@ void Config::addProvider(const AIProviderConfig& provider)
 
 void Config::removeProvider(size_t index)
 {
-    // Cannot remove built-in providers (first 3)
-    if (index < 3 || index >= _providers.size())
+    // Cannot remove built-in providers (first 4)
+    if (index < 4 || index >= _providers.size())
         return;
 
     if (_providers[index].isBuiltIn)
@@ -325,4 +340,44 @@ std::string Config::deobfuscate(const std::string& str)
     }
 
     return result;
+}
+//
+std::string Config::getOpenAIModel() const
+{
+    return _openAIModel;
+}
+
+std::string Config::getClaudeModel() const
+{
+    return _claudeModel;
+}
+
+std::string Config::getGeminiModel() const
+{
+    return _geminiModel;
+}
+
+std::string Config::getOllamaModel() const
+{
+    return _ollamaModel;
+}
+
+void Config::setOpenAIModel(const std::string& model)
+{
+    _openAIModel = model;
+}
+
+void Config::setClaudeModel(const std::string& model)
+{
+    _claudeModel = model;
+}
+
+void Config::setGeminiModel(const std::string& model)
+{
+    _geminiModel = model;
+}
+
+void Config::setOllamaModel(const std::string& model)
+{
+    _ollamaModel = model;
 }
