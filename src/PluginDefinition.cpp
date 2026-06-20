@@ -63,7 +63,7 @@ void commandMenuCleanUp()
     // Clean up shortcut if needed
 }
 
-bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk, bool check0nInit)
+bool setCommand(size_t index, const TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey *sk, bool check0nInit)
 {
     if (index >= nbFunc)
         return false;
