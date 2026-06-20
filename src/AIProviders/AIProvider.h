@@ -13,7 +13,8 @@ enum class ProviderType
 {
     OpenAI = 0,
     Claude = 1,
-    Gemini = 2
+    Gemini = 2,
+	Ollama = 3
 };
 
 // Abstract base class for AI providers

@@ -1,67 +1,91 @@
 //this file is part of notepad_aiplug
 //Copyright (C)2025
 
-#include "OpenAIProvider.h"
+#include "OllamaProvider.h"
 #include "Http/HttpClient.h"
 #include "nlohmann/json.hpp"
 #include <stdexcept>
 
 using json = nlohmann::json;
 
-const char* OpenAIProvider::API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
+const char* OllamaProvider::API_ENDPOINT = "http://127.0.0.1:11434/v1/chat/completions";
 
-OpenAIProvider::OpenAIProvider()
-    : _model("gpt-4o")
+ProviderType OllamaProvider::getType() const
+{
+    return ProviderType::Ollama;
+}
+
+std::string OllamaProvider::getName() const
+{
+    return "Ollama";
+}
+
+OllamaProvider::OllamaProvider()
+    : _model("phi3")
 {
 }
 
-void OpenAIProvider::setApiKey(const std::string& key)
+void OllamaProvider::setApiKey(const std::string& key)
 {
-    _apiKey = key;
+    //Not used by ollama 
 }
 
-std::string OpenAIProvider::getApiKeyMasked() const
+std::string OllamaProvider::getApiKeyMasked() const
 {
-    if (_apiKey.empty())
-        return "";
-    if (_apiKey.length() <= 8)
-        return std::string(_apiKey.length(), '*');
-    return _apiKey.substr(0, 4) + std::string(_apiKey.length() - 8, '*') + _apiKey.substr(_apiKey.length() - 4);
+    return ""; //Not used by Ollama
 }
 
-bool OpenAIProvider::hasApiKey() const
+bool OllamaProvider::hasApiKey() const
 {
-    return !_apiKey.empty();
+    return true;
 }
 
-void OpenAIProvider::setModel(const std::string& model)
+void OllamaProvider::setModel(const std::string& model)
 {
     _model = model;
 }
 
-std::string OpenAIProvider::getModel() const
+std::string OllamaProvider::getModel() const
 {
     return _model;
 }
 
-std::vector<std::string> OpenAIProvider::getAvailableModels() const
+std::vector<std::string> OllamaProvider::getAvailableModels() const
 {
-    return {
-        "gpt-4o",
-        "gpt-4o-mini",
-        "gpt-4-turbo",
-        "gpt-4",
-        "gpt-3.5-turbo"
-    };
-}
+    std::vector<std::string> models;
 
-std::string OpenAIProvider::sendPrompt(const std::string& prompt, const std::string& context)
-{
-    if (_apiKey.empty())
+    try
     {
-        throw std::runtime_error("OpenAI API key not set. Please configure it in Settings.");
+        HttpClient http;
+
+        std::string response =
+            http.get("http://127.0.0.1:11434/api/tags");
+
+        json responseJson = json::parse(response);
+
+        if (responseJson.contains("models"))
+        {
+            for (const auto& model : responseJson["models"])
+            {
+                if (model.contains("name"))
+                {
+                    models.push_back(
+                        model["name"].get<std::string>()
+                    );
+                }
+            }
+        }
+    }
+    catch (...)
+    {
+        models.push_back("starcoder2:3b");
     }
 
+    return models;
+}
+
+std::string OllamaProvider::sendPrompt(const std::string& prompt, const std::string& context)
+{
     // Build the full prompt with context
     std::string fullPrompt = prompt;
     if (!context.empty())
@@ -71,6 +95,7 @@ std::string OpenAIProvider::sendPrompt(const std::string& prompt, const std::str
 
     // Build request JSON
     json requestBody;
+	requestBody["stream"] = false;
     requestBody["model"] = _model;
     requestBody["messages"] = json::array();
     requestBody["messages"].push_back({
@@ -84,19 +109,19 @@ std::string OpenAIProvider::sendPrompt(const std::string& prompt, const std::str
         {"role", "user"},
         {"content", fullPrompt}
     });
-    requestBody["max_tokens"] = 2048;
+    //requestBody["max_tokens"] = 2048;
 
     // Send request
     HttpClient http;
     http.setHeader("Content-Type", "application/json");
-    http.setHeader("Authorization", "Bearer " + _apiKey);
 
     // Use custom endpoint if set, otherwise use default
     std::string endpoint = _customEndpoint.empty() ? API_ENDPOINT : _customEndpoint;
 
     try {
+		
         std::string response = http.post(endpoint, requestBody.dump());
-
+		
         json responseJson = json::parse(response);
 
         if (responseJson.contains("error"))

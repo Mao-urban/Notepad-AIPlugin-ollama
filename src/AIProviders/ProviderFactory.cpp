@@ -6,6 +6,7 @@
 #include "ClaudeProvider.h"
 #include "GeminiProvider.h"
 #include "Utils/Config.h"
+#include "OllamaProvider.h"
 
 AIProviderPtr ProviderFactory::createProvider(int index)
 {
@@ -50,6 +51,13 @@ AIProviderPtr ProviderFactory::createProvider(ProviderType type)
             provider = std::move(gemini);
             break;
         }
+		case ProviderType::Ollama:
+		{
+			auto ollama = std::make_unique<OllamaProvider>();
+			ollama->setModel(config.getOllamaModel());
+			provider = std::move(ollama);
+			break;
+		}
         default:
             return nullptr;
     }
@@ -100,6 +108,17 @@ AIProviderPtr ProviderFactory::createProviderFromConfig(const AIProviderConfig& 
             provider = std::move(gemini);
             break;
         }
+		case APIType::Ollama:
+		{
+			auto ollama = std::make_unique<OllamaProvider>();
+			ollama->setModel(globalConfig.getOllamaModel());
+			if (!config.customEndpoint.empty())
+			{
+				ollama->setEndpoint(config.customEndpoint);
+			}
+			provider = std::move(ollama);
+			break;
+		}
         default:
             return nullptr;
     }
