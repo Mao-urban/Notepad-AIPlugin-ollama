@@ -6,12 +6,11 @@
 
 A Notepad++ plugin that integrates AI capabilities (ChatGPT, Claude, Gemini, Ollama) directly into the editor.
 
-![AI Panel Screenshot](docs/screenshot.png)
 
 ## Features
 
 - **Dockable AI Chat Panel** - Opens on the right side of Notepad++
-- **Multiple AI Providers** - Support for OpenAI (ChatGPT), Anthropic (Claude), and Google (Gemini)
+- **Multiple AI Providers** - Support for OpenAI (ChatGPT), Anthropic (Claude), Ollama and Google (Gemini)
 - **Custom Endpoints** - Use OpenRouter, local LLMs, or any OpenAI-compatible API
 - **Context-Aware** - Automatically includes file content and selected text in prompts
 - **Apply AI Suggestions** - Apply AI-generated code changes directly to your document
