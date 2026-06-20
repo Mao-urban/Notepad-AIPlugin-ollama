@@ -10,7 +10,7 @@
 #pragma comment(lib, "winhttp.lib")
 
 HttpClient::HttpClient()
-    : _timeoutMs(60000) // 60 second default timeout
+    : _timeoutMs(600000) // 30 minutes default timeout
 {
 }
 
