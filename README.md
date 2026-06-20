@@ -182,6 +182,7 @@ notepad_aiplug/
 │   │   ├── OpenAIProvider.*    # ChatGPT / OpenAI-compatible
 │   │   ├── ClaudeProvider.*    # Claude
 │   │   └── GeminiProvider.*    # Gemini
+|   |   └── OllamaProvider.*    # Ollama 
 │   ├── Http/
 │   │   └── HttpClient.*        # WinHTTP wrapper
 │   └── Utils/
@@ -189,8 +190,7 @@ notepad_aiplug/
 ├── include/                    # Notepad++/Scintilla headers
 ├── res/                        # Dialog resources
 ├── lib/nlohmann/json.hpp       # JSON library
-├── vs.proj/                    # Visual Studio project
-└── NPPAIPlugin-Ollama.slnx          # Solution file
+└── NPPAIPlugin-Ollama.slnx     # Solution file
 ```
 
 ## Troubleshooting
