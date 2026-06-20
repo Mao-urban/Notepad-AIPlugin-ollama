@@ -150,10 +150,10 @@ void AIPanelDlg::refreshProviderList()
         MultiByteToWideChar(CP_UTF8, 0, providers[i].name.c_str(), -1, &wname[0], len);
 
         // Add indicator if no API key
-        if (providers[i].apiKey.empty())
-        {
-            wname += L" [No Key]";
-        }
+        if (providers[i].apiType != APIType::Ollama && providers[i].apiKey.empty())
+		{
+			wname += L" [No Key]";
+		}
 
         ::SendMessage(_hProviderCombo, CB_ADDSTRING, 0, (LPARAM)wname.c_str());
     }
@@ -187,12 +187,15 @@ void AIPanelDlg::sendPrompt()
         return;
     }
 
-    if (providers[providerIndex].apiKey.empty())
-    {
-        ::MessageBox(_hSelf, TEXT("No API key configured for this provider.\n\nPlease go to Settings to add your API key."),
-            TEXT("No API Key"), MB_OK | MB_ICONWARNING);
-        return;
-    }
+    if (providers[providerIndex].apiType != APIType::Ollama &&
+		providers[providerIndex].apiKey.empty())
+	{
+		::MessageBox(_hSelf,
+			TEXT("No API key configured for this provider.\n\nPlease go to Settings to add your API key."),
+			TEXT("No API Key"),
+			MB_OK | MB_ICONWARNING);
+		return;
+	}
 
     std::vector<TCHAR> buffer(len + 1);
     ::GetWindowText(_hPromptEdit, buffer.data(), len + 1);

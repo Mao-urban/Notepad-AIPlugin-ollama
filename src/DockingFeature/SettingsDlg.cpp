@@ -122,6 +122,9 @@ void SettingsDlg::updateEditFields()
             case APIType::Gemini:
                 urlToShow = "https://generativelanguage.googleapis.com/v1/models/{model}:generateContent";
                 break;
+			case APIType::Ollama:
+				urlToShow = "http://127.0.0.1:11434/v1/chat/completions";
+			break;	
         }
     }
     len = MultiByteToWideChar(CP_UTF8, 0, urlToShow.c_str(), -1, nullptr, 0);
@@ -143,7 +146,7 @@ void SettingsDlg::getEditFieldValues(AIProviderConfig& provider)
     WideCharToMultiByte(CP_UTF8, 0, buffer, -1, &provider.name[0], len, nullptr, nullptr);
 
     // Default to OpenAI API type for new providers
-    provider.apiType = APIType::OpenAI;
+    //provider.apiType = APIType::OpenAI;
 
     // Get API key
     memset(buffer, 0, sizeof(buffer));
@@ -158,14 +161,27 @@ void SettingsDlg::getEditFieldValues(AIProviderConfig& provider)
     len = WideCharToMultiByte(CP_UTF8, 0, buffer, -1, nullptr, 0, nullptr, nullptr);
     provider.customEndpoint.resize(len - 1);
     WideCharToMultiByte(CP_UTF8, 0, buffer, -1, &provider.customEndpoint[0], len, nullptr, nullptr);
+	
+	//Default to openAi type for new 
+	if (provider.name == "Ollama" ||
+		provider.customEndpoint.find("11434") != std::string::npos)
+	{
+		provider.apiType = APIType::Ollama;
+	}
+	else
+	{
+		provider.apiType = APIType::OpenAI;
+	}
 
     // Clear custom endpoint if it matches the default URL (so default is used)
     if (provider.customEndpoint == "https://api.openai.com/v1/chat/completions" ||
         provider.customEndpoint == "https://api.anthropic.com/v1/messages" ||
-        provider.customEndpoint == "https://generativelanguage.googleapis.com/v1/models/{model}:generateContent")
+        provider.customEndpoint == "https://generativelanguage.googleapis.com/v1/models/{model}:generateContent" ||
+		provider.customEndpoint == "http://127.0.0.1:11434/v1/chat/completions" )
     {
         provider.customEndpoint.clear();
     }
+	
 }
 
 void SettingsDlg::addProvider()

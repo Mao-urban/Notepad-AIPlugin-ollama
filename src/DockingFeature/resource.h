@@ -46,4 +46,9 @@
 #define IDC_DIFF_APPLY_BTN          3203
 #define IDC_DIFF_CANCEL_BTN         3204
 
+// Go To Line Dialog
+#define IDD_PLUGINGOLINE_DEMO 3400
+#define ID_UGO_STATIC         3401
+#define ID_GOLINE_EDIT        3402
+
 #endif // RESOURCE_H
