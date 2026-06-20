@@ -1,0 +1,24 @@
+CXX=g++
+
+CXXFLAGS=-std=c++17 -O2
+
+INCLUDES=\
+-I. \
+-I./AIProviders \
+-I./Http \
+-I./Utils \
+-I./DockingFeature
+
+LIBS=\
+-lwinhttp \
+-lshlwapi
+
+SRC=$(wildcard AIProviders/*.cpp) \
+    $(wildcard Http/*.cpp) \
+    $(wildcard Utils/*.cpp)
+
+all:
+	$(CXX) $(CXXFLAGS) $(INCLUDES) \
+	-shared $(SRC) \
+	-o NPPAIPlugin-Ollama.dll \
+	$(LIBS)
