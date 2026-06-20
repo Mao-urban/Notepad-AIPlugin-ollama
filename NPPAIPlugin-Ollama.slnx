@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="NPPAIPlugin-Ollama.vcxproj" Id="aca83a74-1444-424f-8e7d-8209b534e113" />
+</Solution>

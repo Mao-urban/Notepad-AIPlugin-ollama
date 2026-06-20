@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{aca83a74-1444-424f-8e7d-8209b534e113}</ProjectGuid>
+    <RootNamespace>NPPAIPluginOllama</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;NPPAIPLUGINOLLAMA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;NPPAIPLUGINOLLAMA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(ProjectDir)\src;$(ProjectDir)\src\AIProviders;$(ProjectDir)\src\DockingFeature;$(ProjectDir)\src\Http;$(ProjectDir)\src\Utils;$(ProjectDir)\lib</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\DockingFeature;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\DockingFeature;$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\AIProvider.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\ClaudeProvider.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\GeminiProvider.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\OpenAIProvider.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\ProviderFactory.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\AIPanelDlg.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\DiffViewDlg.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\Docking.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\DockingDlgInterface.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\dockingResource.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\GoToLineDlg.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\resource.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\SettingsDlg.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\StaticDialog.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\Window.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\Http\HttpClient.h" />
+    <ClInclude Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\Utils\Config.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="src\AIProviders\OllamaProvider.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\ClaudeProvider.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\GeminiProvider.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\OpenAIProvider.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\AIProviders\ProviderFactory.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\AIPanelDlg.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\DiffViewDlg.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\GoToLineDlg.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\SettingsDlg.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\DockingFeature\StaticDialog.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\Http\HttpClient.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\NppPluginDemo.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\PluginDefinition.cpp" />
+    <ClCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\src\Utils\Config.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\AIProviders\OllamaProvider.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\res\AIPanel.rc" />
+    <ResourceCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\res\goLine.rc" />
+    <ResourceCompile Include="..\..\..\..\..\Downloads\Notepad-AIPlugin-main\Notepad-AIPlugin\res\NppPluginDemo.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
