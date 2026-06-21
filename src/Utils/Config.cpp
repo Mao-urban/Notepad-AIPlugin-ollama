@@ -5,6 +5,7 @@
 #include <shlwapi.h>
 #include <shlobj.h>
 #include <vector>
+#include <stdexcept>
 
 #pragma comment(lib, "shlwapi.lib")
 

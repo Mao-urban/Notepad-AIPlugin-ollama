@@ -81,20 +81,19 @@ public:
     void setEditMode(EditMode mode) { _editMode = mode; }
 
     // Legacy getters for backward compatibility
-	// Legacy getters for backward compatibility
-	std::string getOpenAIKey() const;
-	std::string getClaudeKey() const;
-	std::string getGeminiKey() const;
+    std::string getOpenAIKey() const;
+    std::string getClaudeKey() const;
+    std::string getGeminiKey() const;
 
-	std::string getOpenAIModel() const;
-	std::string getClaudeModel() const;
-	std::string getGeminiModel() const;
-	std::string getOllamaModel() const;
+    std::string getOpenAIModel() const;
+    std::string getClaudeModel() const;
+    std::string getGeminiModel() const;
+    std::string getOllamaModel() const;
 
-	void setOpenAIModel(const std::string& model);
-	void setClaudeModel(const std::string& model);
-	void setGeminiModel(const std::string& model);
-	void setOllamaModel(const std::string& model);
+    void setOpenAIModel(const std::string& model);
+    void setClaudeModel(const std::string& model);
+    void setGeminiModel(const std::string& model);
+    void setOllamaModel(const std::string& model);
 
 private:
     Config();
@@ -122,11 +121,11 @@ private:
     // Simple XOR obfuscation for API keys
     std::string obfuscate(const std::string& str);
     std::string deobfuscate(const std::string& str);
-	//
-	std::string _openAIModel = "gpt-4o";
-	std::string _claudeModel = "claude-sonnet-4-20250514";
-	std::string _geminiModel = "gemini-1.5-pro";
-	std::string _ollamaModel = "starcoder2:3b";
+    //
+    std::string _openAIModel = "gpt-4o";
+    std::string _claudeModel = "claude-sonnet-4-20250514";
+    std::string _geminiModel = "gemini-1.5-pro";
+    std::string _ollamaModel = "starcoder2:3b";
 };
 
 #endif // CONFIG_H
