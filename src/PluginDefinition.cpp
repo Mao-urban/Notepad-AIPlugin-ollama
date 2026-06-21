@@ -114,9 +114,9 @@ void showAbout()
 {
     ::MessageBox(nppData._nppHandle,
         TEXT("AI Assistant for Notepad++\n\n")
-        TEXT("Version 1.0.0\n\n")
+        TEXT("Version 2.0.1\n\n")
         TEXT("Integrates AI capabilities directly into Notepad++.\n")
-        TEXT("Supports ChatGPT, Claude, and Gemini.\n\n")
+        TEXT("Supports ChatGPT, Claude, Ollama and Gemini.\n\n")
         TEXT("Copyright (C) 2025"),
         TEXT("About AI Assistant"),
         MB_OK | MB_ICONINFORMATION);
