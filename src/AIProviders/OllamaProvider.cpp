@@ -21,7 +21,7 @@ std::string OllamaProvider::getName() const
 }
 
 OllamaProvider::OllamaProvider()
-    : _model("phi3")
+    : _model("")
 {
 }
 
@@ -42,7 +42,7 @@ bool OllamaProvider::hasApiKey() const
 
 void OllamaProvider::setModel(const std::string& model)
 {
-    _model = model;
+    _model = model;        
 }
 
 std::string OllamaProvider::getModel() const
@@ -90,7 +90,7 @@ std::string OllamaProvider::sendPrompt(const std::string& prompt, const std::str
     std::string fullPrompt = prompt;
     if (!context.empty())
     {
-        fullPrompt = context + "\n\nUser request: " + prompt;
+        fullPrompt = prompt + "\n\n" + context  ;
     }
 
     // Build request JSON
@@ -99,18 +99,11 @@ std::string OllamaProvider::sendPrompt(const std::string& prompt, const std::str
     requestBody["model"] = _model;
     requestBody["messages"] = json::array();
     requestBody["messages"].push_back({
-        {"role", "system"},
-        {"content", "You are a helpful coding assistant integrated into Notepad++. "
-                    "Help the user with their code-related questions and tasks. "
-                    "When providing code, be concise and provide only the relevant code. "
-                    "If the user asks you to modify code, provide the complete modified code."}
-    });
-    requestBody["messages"].push_back({
         {"role", "user"},
         {"content", fullPrompt}
     });
     //requestBody["max_tokens"] = 2048;
-
+    
     // Send request
     HttpClient http;
     http.setHeader("Content-Type", "application/json");
